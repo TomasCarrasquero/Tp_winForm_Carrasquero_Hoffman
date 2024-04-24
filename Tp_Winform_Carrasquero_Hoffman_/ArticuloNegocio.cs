@@ -20,7 +20,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true"; 
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select Codigo, Nombre, Descripcion, Precio from ARTICULOS";
+                comando.CommandText = "Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca";
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -33,6 +33,19 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                     aux.nombre = (string)lector["Nombre"];
                     aux.descripcion = (string)lector["Descripcion"];
                     aux.precio = (decimal)lector["Precio"];
+                    aux.imagen = (string)lector["ImagenUrl"];
+                    
+
+                    //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
+                    aux.categoria = new Categoria();
+                    aux.categoria.nombre = (string)lector["Categoria"];
+              
+                    aux.marca = new Marca();
+                    aux.marca.nombre = (string)lector["Marca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
+                   
+
+
+
 
                     lista.Add(aux);
                 }

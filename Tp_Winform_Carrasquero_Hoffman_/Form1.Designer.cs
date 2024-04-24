@@ -48,7 +48,7 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.labelMenuPrincipal);
             this.panel1.Location = new System.Drawing.Point(2, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(833, 107);
             this.panel1.TabIndex = 0;
@@ -67,7 +67,7 @@
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(9, 321);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(120, 36);
             this.btnAdd.TabIndex = 1;
@@ -77,7 +77,7 @@
             // btnDetalles
             // 
             this.btnDetalles.Location = new System.Drawing.Point(133, 321);
-            this.btnDetalles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDetalles.Margin = new System.Windows.Forms.Padding(2);
             this.btnDetalles.Name = "btnDetalles";
             this.btnDetalles.Size = new System.Drawing.Size(120, 36);
             this.btnDetalles.TabIndex = 2;
@@ -87,7 +87,7 @@
             // btnEliminar
             // 
             this.btnEliminar.Location = new System.Drawing.Point(383, 321);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(120, 36);
             this.btnEliminar.TabIndex = 3;
@@ -99,7 +99,7 @@
             this.txtBuscar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscar.ForeColor = System.Drawing.SystemColors.MenuText;
             this.txtBuscar.Location = new System.Drawing.Point(17, 375);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.txtBuscar.Name = "txtBuscar";
             this.txtBuscar.Size = new System.Drawing.Size(312, 26);
             this.txtBuscar.TabIndex = 4;
@@ -107,7 +107,7 @@
             // btnBuscar
             // 
             this.btnBuscar.Location = new System.Drawing.Point(346, 375);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(75, 31);
             this.btnBuscar.TabIndex = 5;
@@ -118,20 +118,21 @@
             // 
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Location = new System.Drawing.Point(9, 149);
-            this.dgvLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvLista.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.RowHeadersWidth = 51;
             this.dgvLista.RowTemplate.Height = 24;
             this.dgvLista.Size = new System.Drawing.Size(514, 152);
             this.dgvLista.TabIndex = 6;
-      
+            this.dgvLista.SelectionChanged += new System.EventHandler(this.dgvLista_SelectionChanged);
             // 
             // pbxLista
             // 
             this.pbxLista.Location = new System.Drawing.Point(554, 145);
-            this.pbxLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pbxLista.Margin = new System.Windows.Forms.Padding(2);
             this.pbxLista.Name = "pbxLista";
             this.pbxLista.Size = new System.Drawing.Size(262, 255);
+            this.pbxLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxLista.TabIndex = 7;
             this.pbxLista.TabStop = false;
             // 
@@ -159,7 +160,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MenuPrincipal";
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.MenuPrincipal_Load);
