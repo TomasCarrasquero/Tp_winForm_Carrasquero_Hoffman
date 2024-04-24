@@ -16,5 +16,11 @@ namespace Tp_Winform_Carrasquero_Hoffman_
         {
             InitializeComponent();
         }
+
+        private void MenuPrincipal_Load(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            dgvLista.DataSource = negocio.listar();
+        }
     }
 }

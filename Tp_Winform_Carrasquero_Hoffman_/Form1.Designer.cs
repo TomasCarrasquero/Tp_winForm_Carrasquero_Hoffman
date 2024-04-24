@@ -37,6 +37,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvLista = new System.Windows.Forms.DataGridView();
             this.pbxLista = new System.Windows.Forms.PictureBox();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLista)).BeginInit();
@@ -46,44 +47,49 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.labelMenuPrincipal);
-            this.panel1.Location = new System.Drawing.Point(3, 0);
+            this.panel1.Location = new System.Drawing.Point(2, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1111, 132);
+            this.panel1.Size = new System.Drawing.Size(833, 107);
             this.panel1.TabIndex = 0;
             // 
             // labelMenuPrincipal
             // 
             this.labelMenuPrincipal.AutoSize = true;
             this.labelMenuPrincipal.Font = new System.Drawing.Font("Arial", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMenuPrincipal.Location = new System.Drawing.Point(337, 28);
+            this.labelMenuPrincipal.Location = new System.Drawing.Point(253, 23);
+            this.labelMenuPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMenuPrincipal.Name = "labelMenuPrincipal";
-            this.labelMenuPrincipal.Size = new System.Drawing.Size(358, 55);
+            this.labelMenuPrincipal.Size = new System.Drawing.Size(292, 45);
             this.labelMenuPrincipal.TabIndex = 0;
             this.labelMenuPrincipal.Text = "Menú Principal";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(23, 395);
+            this.btnAdd.Location = new System.Drawing.Point(9, 321);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(172, 44);
+            this.btnAdd.Size = new System.Drawing.Size(120, 36);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Agregar articulo";
             this.btnAdd.UseVisualStyleBackColor = true;
             // 
             // btnDetalles
             // 
-            this.btnDetalles.Location = new System.Drawing.Point(266, 395);
+            this.btnDetalles.Location = new System.Drawing.Point(133, 321);
+            this.btnDetalles.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDetalles.Name = "btnDetalles";
-            this.btnDetalles.Size = new System.Drawing.Size(172, 44);
+            this.btnDetalles.Size = new System.Drawing.Size(120, 36);
             this.btnDetalles.TabIndex = 2;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(499, 395);
+            this.btnEliminar.Location = new System.Drawing.Point(383, 321);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(172, 44);
+            this.btnEliminar.Size = new System.Drawing.Size(120, 36);
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -92,16 +98,18 @@
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscar.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.txtBuscar.Location = new System.Drawing.Point(23, 462);
+            this.txtBuscar.Location = new System.Drawing.Point(17, 375);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(415, 30);
+            this.txtBuscar.Size = new System.Drawing.Size(312, 26);
             this.txtBuscar.TabIndex = 4;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(462, 462);
+            this.btnBuscar.Location = new System.Drawing.Point(346, 375);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(100, 38);
+            this.btnBuscar.Size = new System.Drawing.Size(75, 31);
             this.btnBuscar.TabIndex = 5;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
@@ -109,26 +117,39 @@
             // dgvLista
             // 
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLista.Location = new System.Drawing.Point(12, 183);
+            this.dgvLista.Location = new System.Drawing.Point(9, 149);
+            this.dgvLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.RowHeadersWidth = 51;
             this.dgvLista.RowTemplate.Height = 24;
-            this.dgvLista.Size = new System.Drawing.Size(686, 187);
+            this.dgvLista.Size = new System.Drawing.Size(514, 152);
             this.dgvLista.TabIndex = 6;
+      
             // 
             // pbxLista
             // 
-            this.pbxLista.Location = new System.Drawing.Point(738, 178);
+            this.pbxLista.Location = new System.Drawing.Point(554, 145);
+            this.pbxLista.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pbxLista.Name = "pbxLista";
-            this.pbxLista.Size = new System.Drawing.Size(350, 314);
+            this.pbxLista.Size = new System.Drawing.Size(262, 255);
             this.pbxLista.TabIndex = 7;
             this.pbxLista.TabStop = false;
             // 
+            // btnEditar
+            // 
+            this.btnEditar.Location = new System.Drawing.Point(258, 321);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(120, 36);
+            this.btnEditar.TabIndex = 8;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            // 
             // MenuPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 511);
+            this.ClientSize = new System.Drawing.Size(834, 415);
+            this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.pbxLista);
             this.Controls.Add(this.dgvLista);
             this.Controls.Add(this.btnBuscar);
@@ -138,8 +159,10 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MenuPrincipal";
             this.Text = "Principal";
+            this.Load += new System.EventHandler(this.MenuPrincipal_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
@@ -160,6 +183,7 @@
         private System.Windows.Forms.Button btnBuscar;
         private System.Windows.Forms.DataGridView dgvLista;
         private System.Windows.Forms.PictureBox pbxLista;
+        private System.Windows.Forms.Button btnEditar;
     }
 }
 
