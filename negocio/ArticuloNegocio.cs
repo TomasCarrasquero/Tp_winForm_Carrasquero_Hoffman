@@ -12,52 +12,45 @@ namespace negocio
     {
         public List<Articulo>listar()
         {
+
             List<Articulo> lista = new List<Articulo>();
-            SqlConnection conexion = new SqlConnection();
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
+            AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                conexion.ConnectionString = "server=.\\SQLEXPRESS; database=CATALOGO_P3_DB; integrated security=true"; 
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca";
-                comando.Connection = conexion;
+                datos.setearConsulta("Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca");
+                datos.ejecturaLectura();
 
-                conexion.Open();
-                lector = comando.ExecuteReader();
-
-                while(lector.Read())
+                while(datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.codigo = (string)lector["Codigo"];
-                    aux.nombre = (string)lector["Nombre"];
-                    aux.descripcion = (string)lector["Descripcion"];
-                    aux.precio = (decimal)lector["Precio"];
-                    aux.imagen = (string)lector["ImagenUrl"];
+                    aux.codigo = (string)datos.Lector["Codigo"];
+                    aux.nombre = (string)datos.Lector["Nombre"];
+                    aux.descripcion = (string)datos.Lector["Descripcion"];
+                    aux.precio = (decimal)datos.Lector["Precio"];
+                    aux.imagen = (string)datos.Lector["ImagenUrl"];
                     
 
                     //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
                     aux.categoria = new Categoria();
-                    aux.categoria.nombre = (string)lector["Categoria"];
+                    aux.categoria.nombre = (string)datos.Lector["Categoria"];
               
                     aux.marca = new Marca();
-                    aux.marca.nombre = (string)lector["Marca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
-                   
-
-
-
-
+                    aux.marca.nombre = (string)datos.Lector["Marca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
+                  
                     lista.Add(aux);
                 }
 
-                conexion.Close();
                 return lista;
             }
 
             catch (Exception ex)
             {
                 throw ex; 
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
     }
