@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using dominio;
 
-namespace Tp_Winform_Carrasquero_Hoffman_
+namespace negocio
 {
     public class ArticuloNegocio
     {

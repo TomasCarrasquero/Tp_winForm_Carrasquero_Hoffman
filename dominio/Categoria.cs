@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tp_Winform_Carrasquero_Hoffman_
+namespace dominio
 {
     public class Categoria
     {

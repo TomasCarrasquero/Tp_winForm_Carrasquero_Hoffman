@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Tp_Winform_Carrasquero_Hoffman_
+namespace dominio
 {
     public class Articulo
     {
