@@ -35,12 +35,29 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 arti.nombre = txtNombre.Text;  
                 arti.descripcion = txtDescripcion.Text;
                 arti.imagen = txtUrl.Text;
+                arti.marca= (Marca)cboMarca.SelectedItem;
+                arti.categoria = (Categoria)cboCategoria.SelectedItem;
                 arti.precio = decimal.Parse(txtPrecio.Text);
 
                 negocio.agregar(arti);
                 MessageBox.Show("Agregado correctamente");
                 Close();
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void FrmAgregarArticulo_Load(object sender, EventArgs e)
+        {
+            MarcaNegocio marcanegocio = new MarcaNegocio();
+            CategoriaNegocio categorianegocio = new CategoriaNegocio();
+            try
+            {
+                cboMarca.DataSource = marcanegocio.listar();
+                cboCategoria.DataSource = categorianegocio.listar();
             }
             catch (Exception ex)
             {
