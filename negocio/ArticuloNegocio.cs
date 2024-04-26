@@ -10,7 +10,7 @@ namespace negocio
 {
     public class ArticuloNegocio
     {
-        public List<Articulo>listar()
+        public List<Articulo> listar()
         {
 
             List<Articulo> lista = new List<Articulo>();
@@ -22,7 +22,7 @@ namespace negocio
                 datos.setearConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, M.Descripcion Marca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
                 datos.ejecturaLectura();
 
-                while(datos.Lector.Read())
+                while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
                     aux.codigo = (string)datos.Lector["Codigo"];
@@ -30,15 +30,15 @@ namespace negocio
                     aux.descripcion = (string)datos.Lector["Descripcion"];
                     aux.precio = (decimal)datos.Lector["Precio"];
                     aux.imagen = (string)datos.Lector["ImagenUrl"];
-                    
+
 
                     //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
                     aux.categoria = new Categoria();
                     aux.categoria.nombre = (string)datos.Lector["Categoria"];
-              
+
                     aux.marca = new Marca();
                     aux.marca.nombre = (string)datos.Lector["Marca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
-                  
+
                     lista.Add(aux);
                 }
 
@@ -47,7 +47,26 @@ namespace negocio
 
             catch (Exception ex)
             {
-                throw ex; 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Insert into ARTICULOS (Codigo,Nombre, Descripcion , IDMarca, IDCategoria, Precio) values ('" + nuevo.codigo + "', '" + nuevo.nombre + "','" + nuevo.descripcion + "' , 1 ,1, 1)");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

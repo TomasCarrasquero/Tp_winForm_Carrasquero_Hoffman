@@ -47,5 +47,12 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 pbxLista.Load("https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg");
             }
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            FrmAgregarArticulo alta = new FrmAgregarArticulo();
+            alta.ShowDialog();
+
+        }
     }
 }
