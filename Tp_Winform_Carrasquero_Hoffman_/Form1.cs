@@ -69,5 +69,16 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             alta.ShowDialog();
             cargar();
         }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+
+            FrmAgregarArticulo editar = new FrmAgregarArticulo(seleccionado);
+            editar.ShowDialog();
+            cargar();
+
+        }
     }
 }

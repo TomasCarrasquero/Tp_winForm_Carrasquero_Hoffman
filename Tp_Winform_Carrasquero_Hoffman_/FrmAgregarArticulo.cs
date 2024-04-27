@@ -16,9 +16,18 @@ namespace Tp_Winform_Carrasquero_Hoffman_
     {
         private object pbxLista;
 
+        private Articulo articulo = null;
+
         public FrmAgregarArticulo()
         {
             InitializeComponent();
+        }
+        public FrmAgregarArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modificar Articulo";
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -28,7 +37,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo arti = new Articulo();
+            //Articulo arti = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             Imagen imagen = new Imagen();
@@ -36,13 +45,16 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
             try
             {
-                arti.codigo = txtCodigo.Text;
-                arti.nombre = txtNombre.Text;  
-                arti.descripcion = txtDescripcion.Text;
-                
-                arti.marca= (Marca)cboMarca.SelectedItem;
-                arti.categoria = (Categoria)cboCategoria.SelectedItem;
-                arti.precio = decimal.Parse(txtPrecio.Text);
+                if(articulo == null)
+                    articulo = new Articulo();
+
+                articulo.codigo = txtCodigo.Text;
+                articulo.nombre = txtNombre.Text;
+                articulo.descripcion = txtDescripcion.Text;
+
+                articulo.marca= (Marca)cboMarca.SelectedItem;
+                articulo.categoria = (Categoria)cboCategoria.SelectedItem;
+                articulo.precio = decimal.Parse(txtPrecio.Text);
 
                // arti.imagen = new Imagen();
                // arti.imagen.UrlImagen = txtUrl.Text;
@@ -53,9 +65,19 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 int nuevoIdArticulo = ultimoIdArticulo + 1;
                 imagen.idArticulo = nuevoIdArticulo;
 
-                negocio.agregar(arti);
-                imgNegocio.agregar(imagen);
-                MessageBox.Show("Agregado correctamente");
+                if(articulo.id != 0)
+                {
+                    negocio.modificar(articulo);
+                    MessageBox.Show("Modificado correctamente");
+
+                }
+                else
+                {
+                    negocio.agregar(articulo);
+                    imgNegocio.agregar(imagen);
+                    MessageBox.Show("Agregado correctamente");
+                }
+             
                 Close();
 
             }
@@ -72,7 +94,22 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             try
             {
                 cboMarca.DataSource = marcanegocio.listar();
+                cboMarca.ValueMember = "id";
+                cboMarca.DisplayMember = "nombre";
                 cboCategoria.DataSource = categorianegocio.listar();
+                cboCategoria.ValueMember = "id";
+                cboCategoria.DisplayMember = "nombre";
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.codigo;
+                    txtNombre.Text = articulo.nombre;
+                    txtDescripcion.Text = articulo.descripcion;
+                    // falta cargar imagen
+                    cboMarca.SelectedValue = articulo.marca.id;
+                    cboCategoria.SelectedValue = articulo.categoria.id;
+
+                }
             }
             catch (Exception ex)
             {

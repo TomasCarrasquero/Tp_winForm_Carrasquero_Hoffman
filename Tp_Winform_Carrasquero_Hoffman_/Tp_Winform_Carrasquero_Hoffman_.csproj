@@ -58,12 +58,6 @@
     <Compile Include="FrmAgregarArticulo.Designer.cs">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmEditar.Designer.cs">
-      <DependentUpon>FrmEditar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -71,9 +65,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAgregarArticulo.resx">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditar.resx">
-      <DependentUpon>FrmEditar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

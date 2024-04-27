@@ -20,12 +20,13 @@ namespace negocio
             {
                 //datos.setearConsulta("Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca"); //ESTA NO ME TRAE DOS REGISTROS PORQUE TIENE NULL EN CATEGORIA
                 //datos.setearConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, ISNULL (I.ImagenUrl, 'Sin Url') UrlImagen, I.id, I.IdArticulo , ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, ISNULL (I.ImagenUrl, 'Sin Url') UrlImagen, I.id, I.IdArticulo , ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
                 datos.ejecturaLectura();
 
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    aux.id = (int)datos.Lector["Id"];
                     aux.codigo = (string)datos.Lector["Codigo"];
                     aux.nombre = (string)datos.Lector["Nombre"];
                     aux.descripcion = (string)datos.Lector["Descripcion"];
@@ -118,5 +119,31 @@ namespace negocio
 
             return ultimoId;
         }
+
+        public void modificar(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("Update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idmarca, IdCategoria = @idcategoria, Precio = @precio where Id = @id");
+                datos.setearParametros("@Codigo", articulo.codigo);
+                datos.setearParametros("@Nombre", articulo.nombre);
+                datos.setearParametros("@Descripcion", articulo.descripcion);
+                datos.setearParametros("@IDMarca", articulo.marca.id);
+                datos.setearParametros("@IDCategoria", articulo.categoria.id);
+                datos.setearParametros("@Precio", articulo.precio);
+                datos.setearParametros("@id", articulo.id);
+
+                datos.ejecutarAccion();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
     } 
 }
