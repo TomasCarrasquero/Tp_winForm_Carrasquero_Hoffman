@@ -20,7 +20,7 @@ namespace negocio
             {
                 //datos.setearConsulta("Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca"); //ESTA NO ME TRAE DOS REGISTROS PORQUE TIENE NULL EN CATEGORIA
                 //datos.setearConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
-                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, ISNULL (I.ImagenUrl, 'Sin Url') UrlImagen, I.id, I.IdArticulo , ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
+                datos.setearConsulta("select A.Id , A.Codigo,A.nombre,A.descripcion,A.Precio, I.ImagenUrl, I.Id, C.ID as IDCategoria, C.descripcion Categoria, M.descripcion Marca, M.ID as IDMarca  from ARTICULOS A , CATEGORIAS C, MARCAS M, IMAGENES I  WHERE C.Id= A.IdCategoria and M.id = A.idMarca and C.Id = I.IdArticulo"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
                 datos.ejecturaLectura();
 
                 while (datos.Lector.Read())
@@ -44,9 +44,9 @@ namespace negocio
                     aux.marca.id = (int)datos.Lector["IDMarca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
 
 
-                    if (!(datos.Lector["UrlImagen"] is DBNull))
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
                         aux.imagen = new Imagen();
-                    aux.imagen.UrlImagen = (string)datos.Lector["UrlImagen"];
+                    aux.imagen.UrlImagen = (string)datos.Lector["ImagenUrl"];
                     aux.imagen.id = (int)datos.Lector["id"];
 
 
