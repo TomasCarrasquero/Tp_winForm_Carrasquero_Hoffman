@@ -75,12 +75,19 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            Articulo seleccionado;
-            seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+            if (dgvLista.CurrentRow != null)
+            {
+                Articulo seleccionado;
+                seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
 
-            FrmAgregarArticulo editar = new FrmAgregarArticulo(seleccionado);
-            editar.ShowDialog();
-            cargar();
+                FrmAgregarArticulo editar = new FrmAgregarArticulo(seleccionado);
+                editar.ShowDialog();
+                cargar();
+            }
+            else
+            {
+                MessageBox.Show("Por favor, seleccione un artículo para editar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
     }
