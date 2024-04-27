@@ -49,6 +49,11 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                     articulo = new Articulo();
 
                 articulo.codigo = txtCodigo.Text;
+                if (!soloNumeros(articulo.codigo))
+                {
+                    MessageBox.Show("Por favor, ingrese solo números en el campo de código.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 articulo.nombre = txtNombre.Text;
                 articulo.descripcion = txtDescripcion.Text;
 
@@ -56,10 +61,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 articulo.categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.precio = decimal.Parse(txtPrecio.Text);
 
-               // arti.imagen = new Imagen();
-               // arti.imagen.UrlImagen = txtUrl.Text;
-               // arti.imagen.idArticulo = 1;
-
+        
                 imagen.UrlImagen= txtUrl.Text;
                 int ultimoIdArticulo = negocio.ObtenerUltimoId();
                 int nuevoIdArticulo = ultimoIdArticulo + 1;
@@ -134,5 +136,16 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 pbx_art_nuevo.Load("https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg");
             }
         }
+        private bool soloNumeros(string cadena)
+        {
+                foreach (char caracter in cadena)
+            {
+                if(!(char.IsNumber(caracter)))
+                        return false;
+            }
+            return true;
+        }
+
+
     }
 }
