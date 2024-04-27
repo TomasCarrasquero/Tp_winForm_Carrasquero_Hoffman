@@ -47,8 +47,11 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void dgvLista_SelectionChanged(object sender, EventArgs e)
         {
-            Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.imagen.UrlImagen);
+            if (dgvLista.CurrentRow != null)
+            {
+                Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.imagen.UrlImagen);
+            }
         }
 
         private void cargarImagen(string imagen)
