@@ -22,18 +22,33 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
+            cargar();
+    
+        }
+
+        private void cargar()
+        {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            listaArticulo = negocio.listar();
-            dgvLista.DataSource = listaArticulo;
-            dgvLista.Columns["id"].Visible = false;
-            dgvLista.Columns["imagen"].Visible = false;
-            cargarImagen(listaArticulo[0].imagen);
+
+            try
+            {
+                listaArticulo = negocio.listar();
+                dgvLista.DataSource = listaArticulo;
+                dgvLista.Columns["id"].Visible = false;
+                dgvLista.Columns["imagen"].Visible = false;
+                //cargarImagen(listaArticulo[0].imagen);
+                cargarImagen(listaArticulo[0].imagen.UrlImagen);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void dgvLista_SelectionChanged(object sender, EventArgs e)
         {
             Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
-            cargarImagen(seleccionado.imagen);
+            cargarImagen(seleccionado.imagen.UrlImagen);
         }
 
         private void cargarImagen(string imagen)
@@ -52,7 +67,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
         {
             FrmAgregarArticulo alta = new FrmAgregarArticulo();
             alta.ShowDialog();
-
+            cargar();
         }
     }
 }

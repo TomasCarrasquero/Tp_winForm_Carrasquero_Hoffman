@@ -14,6 +14,8 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 {
     public partial class FrmAgregarArticulo : Form
     {
+        private object pbxLista;
+
         public FrmAgregarArticulo()
         {
             InitializeComponent();
@@ -29,17 +31,30 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             Articulo arti = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
 
+            Imagen imagen = new Imagen();
+            ImagenNegocio imgNegocio = new ImagenNegocio();
+
             try
             {
                 arti.codigo = txtCodigo.Text;
                 arti.nombre = txtNombre.Text;  
                 arti.descripcion = txtDescripcion.Text;
-                arti.imagen = txtUrl.Text;
+                
                 arti.marca= (Marca)cboMarca.SelectedItem;
                 arti.categoria = (Categoria)cboCategoria.SelectedItem;
                 arti.precio = decimal.Parse(txtPrecio.Text);
 
+               // arti.imagen = new Imagen();
+               // arti.imagen.UrlImagen = txtUrl.Text;
+               // arti.imagen.idArticulo = 1;
+
+                imagen.UrlImagen= txtUrl.Text;
+                int ultimoIdArticulo = negocio.ObtenerUltimoId();
+                int nuevoIdArticulo = ultimoIdArticulo + 1;
+                imagen.idArticulo = nuevoIdArticulo;
+
                 negocio.agregar(arti);
+                imgNegocio.agregar(imagen);
                 MessageBox.Show("Agregado correctamente");
                 Close();
 
@@ -62,6 +77,24 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtUrl_Leave(object sender, EventArgs e)
+        {
+            cargarImagen(txtUrl.Text);
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                
+                pbx_art_nuevo.Load(imagen);
+            }
+            catch (Exception ex)
+            {
+                pbx_art_nuevo.Load("https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg");
             }
         }
     }
