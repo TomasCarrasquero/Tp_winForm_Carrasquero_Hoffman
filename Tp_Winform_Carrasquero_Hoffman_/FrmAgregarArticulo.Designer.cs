@@ -45,6 +45,7 @@
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAgregarImagenes = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -197,13 +198,12 @@
             // 
             this.txtPrecio.Location = new System.Drawing.Point(165, 273);
             this.txtPrecio.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPrecio.MaxLength = 8;
+            this.txtPrecio.MaxLength = 10;
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(160, 22);
             this.txtPrecio.TabIndex = 15;
             this.txtPrecio.TextChanged += new System.EventHandler(this.txtPrecio_TextChanged);
             this.txtPrecio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPrecio_KeyPress);
-            this.txtPrecio.ImeModeChanged += new System.EventHandler(this.m);
             // 
             // pictureBox1
             // 
@@ -215,12 +215,23 @@
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // btnAgregarImagenes
+            // 
+            this.btnAgregarImagenes.Location = new System.Drawing.Point(335, 236);
+            this.btnAgregarImagenes.Name = "btnAgregarImagenes";
+            this.btnAgregarImagenes.Size = new System.Drawing.Size(202, 25);
+            this.btnAgregarImagenes.TabIndex = 17;
+            this.btnAgregarImagenes.Text = "Agregar mas imagenes";
+            this.btnAgregarImagenes.UseVisualStyleBackColor = true;
+            this.btnAgregarImagenes.Click += new System.EventHandler(this.btnAgregarImagenes_Click);
+            // 
             // FrmAgregarArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(652, 391);
+            this.Controls.Add(this.btnAgregarImagenes);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtPrecio);
             this.Controls.Add(this.txtUrl);
@@ -268,5 +279,6 @@
         private System.Windows.Forms.TextBox txtUrl;
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnAgregarImagenes;
     }
 }

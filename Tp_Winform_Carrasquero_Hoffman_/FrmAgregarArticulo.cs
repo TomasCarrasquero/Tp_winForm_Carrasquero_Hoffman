@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
@@ -15,9 +16,20 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 {
     public partial class FrmAgregarArticulo : Form
     {
+        private Articulo articulo = null;
+
         public FrmAgregarArticulo()
         {
             InitializeComponent();
+            btnAgregarImagenes.Visible = false;
+        }
+
+        public FrmAgregarArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+
+            this.articulo = articulo;
+            this.Text = "Modificar artículo";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -27,10 +39,10 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo articulo = new Articulo();
+            Articulo articuloOperar = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
 
-            List<string> resultado = ValidarAregarArticulo();
+            List<string> resultado = ValidarArticulo();
 
             if (resultado.Any())
             {
@@ -40,22 +52,54 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
             try
             {
-                articulo.codigo = txtCodigo.Text;
-                articulo.nombre = txtNombre.Text;  
-                articulo.descripcion = txtDescripcion.Text;
-                articulo.imagen = txtUrl.Text;
-                articulo.marca= (Marca)cboMarca.SelectedItem;
-                articulo.categoria = (Categoria)cboCategoria.SelectedItem;
+                if (articulo != null)
+                {
+                    articuloOperar.id = articulo.id;
+                }
+
+                articuloOperar.codigo = txtCodigo.Text;
+                articuloOperar.nombre = txtNombre.Text;
+                articuloOperar.descripcion = txtDescripcion.Text;
+                articuloOperar.marca = (Marca)cboMarca.SelectedItem;
+                articuloOperar.categoria = (Categoria)cboCategoria.SelectedItem;
 
                 if (!string.IsNullOrWhiteSpace(txtPrecio.Text))
                 {
-                    articulo.precio = decimal.Parse(txtPrecio.Text);
+                    decimal precio = decimal.Parse(txtPrecio.Text);
+                    articuloOperar.precio = decimal.Round(precio, 2);
                 }
 
-                negocio.agregar(articulo);
-                MessageBox.Show("Agregado correctamente");
-                this.DialogResult = DialogResult.OK;
+                if (articuloOperar.id > 0)
+                {
+                    negocio.modificar(articuloOperar);
+                    
+                    if (!string.IsNullOrWhiteSpace(txtUrl.Text))
+                    {
+                        negocio.agregarImagen(articuloOperar.id, txtUrl.Text);
+                    }
 
+                    MessageBox.Show("Modificado correctamente");
+                }
+                else
+                {
+                    if (!negocio.validarCodigoExistente(articuloOperar.codigo))
+                    {
+                        MessageBox.Show("El codigo ya existe");
+                        return;
+                    }
+
+                    negocio.agregar(articuloOperar);
+
+                    if (!string.IsNullOrWhiteSpace(txtUrl.Text))
+                    {
+                        int idArticulo = negocio.obtenerIdArticuloPorCodigo(txtCodigo.Text);
+                        negocio.agregarImagen(idArticulo, txtUrl.Text);
+                    }
+
+                    MessageBox.Show("Agregado correctamente");
+                }
+
+                this.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
@@ -70,7 +114,26 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             try
             {
                 cboMarca.DataSource = marcanegocio.listar();
+                cboMarca.ValueMember = "id";
+                cboMarca.DisplayMember = "nombre";
+                cboMarca.SelectedIndex = 1;
+
                 cboCategoria.DataSource = categorianegocio.listar();
+                cboCategoria.ValueMember = "id";
+                cboCategoria.DisplayMember = "nombre";
+                cboCategoria.SelectedIndex = 1;
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.codigo;
+                    txtNombre.Text = articulo.nombre;
+                    txtDescripcion.Text = articulo.descripcion;
+                    txtUrl.Text = articulo.imagen.UrlImagen;
+                    txtPrecio.Text = Convert.ToString(articulo.precio);
+
+                    cboMarca.SelectedValue = articulo.marca.id;
+                    cboCategoria.SelectedValue = articulo.categoria.id;
+                }
             }
             catch (Exception ex)
             {
@@ -96,7 +159,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             }
         }
 
-        private List<string> ValidarAregarArticulo()
+        private List<string> ValidarArticulo()
         {
             List<string> errores = new List<string>();
             
@@ -113,11 +176,6 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             return errores;
         }
 
-        private void m(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtUrl_TextChanged(object sender, EventArgs e)
         {
             try
@@ -128,6 +186,32 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             {
                 pictureBox1.Load("https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg");
             }
+        }
+
+        private void btnAgregarImagenes_Click(object sender, EventArgs e)
+        {
+            Articulo articuloOperar = new Articulo();
+
+            if (articulo != null)
+            {
+                articuloOperar.id = articulo.id;
+            }
+
+            if (articuloOperar.id > 0)
+            {
+                FrmAgregarImagen agregarImagen = new FrmAgregarImagen(articuloOperar);
+                agregarImagen.ShowDialog();
+            }
+            else
+            {
+                FrmAgregarImagen agregarImagen = new FrmAgregarImagen();
+                agregarImagen.ShowDialog();
+            }
+
+
+            //if (agregarImagen.ShowDialog() == DialogResult.OK)
+            //{
+            //}
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             if (dgvLista.CurrentRow != null)
             {
                 Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.imagen);
+                cargarImagen(seleccionado.imagen.UrlImagen);
             }
         }
 
@@ -71,12 +71,72 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private string ObtenerImagenDefault()
         {
-            if (listaArticulo.Any() && !string.IsNullOrWhiteSpace(listaArticulo[0].imagen))
+            if (listaArticulo.Any())
             {
-                return listaArticulo[0].imagen;
+                if (!string.IsNullOrWhiteSpace(listaArticulo[0].imagen.UrlImagen))
+                {
+                    return listaArticulo[0].imagen.UrlImagen;
+                }
             }
 
             return imagenDefault;
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dgvLista.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+                return;
+            }
+            
+            Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+
+            DialogResult result = MessageBox.Show("Esta seguro que desea eliminar el registro?", "eliminar registro", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                ArticuloNegocio artiBusines = new ArticuloNegocio();
+                artiBusines.eliminar(seleccionado);
+               
+                MessageBox.Show("El registro se ha eliminado con exito");
+
+                CargarArticulos();
+            }
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            if (dgvLista.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+                return;
+            }
+
+            Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+
+            FrmAgregarArticulo editar = new FrmAgregarArticulo(seleccionado);
+            
+            if (editar.ShowDialog() == DialogResult.OK)
+            {
+                CargarArticulos();
+            }
+        }
+
+        private void txtBuscar_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (txtBuscar != null)
+            {
+                List<Articulo> filtrar = listaArticulo.FindAll(x => x.nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()) ||
+                                                             x.marca.nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()) ||
+                                                             x.codigo.ToUpper().Contains(txtBuscar.Text.ToUpper()) ||
+                                                             x.descripcion.ToUpper().Contains(txtBuscar.Text.ToUpper()) ||
+                                                             x.categoria.nombre.ToUpper().Contains(txtBuscar.Text.ToUpper()));
+                dgvLista.DataSource = filtrar;
+            }
+            else
+            {
+                dgvLista.DataSource = listaArticulo;
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using dominio;
+using System.Collections;
 
 namespace negocio
 {
@@ -19,17 +20,20 @@ namespace negocio
             try
             {
                 //datos.setearConsulta("Select A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, C.Descripcion Categoria, M.Descripcion Marca from ARTICULOS AS A INNER JOIN IMAGENES I ON I.IdArticulo = A.Id INNER JOIN CATEGORIAS C ON C.Id = A.IdCategoria INNER JOIN MARCAS M ON M.Id = A.IdMarca"); //ESTA NO ME TRAE DOS REGISTROS PORQUE TIENE NULL EN CATEGORIA
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre, A.Descripcion, A.Precio, I.ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca FROM ARTICULOS A LEFT JOIN IMAGENES I ON I.IdArticulo = A.Id LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
+                datos.setearConsulta("SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id AND ISNULL(ImagenUrl,'') <> '') as ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca  FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
                 datos.ejecturaLectura();
 
                 while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
+                    aux.id = (int)datos.Lector["Id"];
                     aux.codigo = (string)datos.Lector["Codigo"];
                     aux.nombre = (string)datos.Lector["Nombre"];
                     aux.descripcion = (string)datos.Lector["Descripcion"];
                     aux.precio = (decimal)datos.Lector["Precio"];
-                    aux.imagen = datos.Lector["ImagenUrl"] != System.DBNull.Value ? (string)datos.Lector["ImagenUrl"] : $"https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg";
+
+                    aux.imagen = new Imagen();
+                    aux.imagen.UrlImagen = datos.Lector["ImagenUrl"] != System.DBNull.Value ? (string)datos.Lector["ImagenUrl"] : "";
 
                     //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
                     aux.categoria = new Categoria();
@@ -68,6 +72,195 @@ namespace negocio
                 datos.setearParametros("@Precio", nuevo.precio);
                 datos.ejecutarAccion();
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Articulo articuloParaModificar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"update ARTICULOS SET Codigo = '{articuloParaModificar.codigo}', Nombre = '{articuloParaModificar.nombre}', Descripcion = '{articuloParaModificar.descripcion}', Precio = {articuloParaModificar.precio.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)}, IdCategoria = {articuloParaModificar.categoria.id}, IdMarca = {articuloParaModificar.marca.id} WHERE Id = {articuloParaModificar.id}");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(Articulo articuloParaEliminar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                // Elimino imagenes asociadas al articulo
+                datos.setearConsulta("delete from IMAGENES where IdArticulo = @IdArticulo");
+                datos.setearParametros("@IdArticulo", articuloParaEliminar.id);
+                datos.ejecutarAccion();
+                datos.cerrarConexion();
+
+                // Elimino articulo
+                datos.setearConsulta("delete from Articulos where id = " + articuloParaEliminar.id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public bool validarCodigoExistente(string codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"select 1 from ARTICULOS where Codigo = '{codigo}'");
+                datos.ejecturaLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int obtenerIdArticuloPorCodigo(string codigo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"select 1 from ARTICULOS where Codigo = '{codigo}'");
+                datos.ejecturaLectura();
+
+                if (datos.Lector.Read())
+                {
+                    return (int)datos.Lector["Id"];
+                }
+
+                throw new Exception("Codigo articulo invalido");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void agregarImagen(int idArticulo, string urlImagen)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"Insert into IMAGENES (IdArticulo,ImagenUrl) values ({idArticulo}, '{urlImagen}')");
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<string> obtenerImagenes(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<string> imagenes = new List<string>();
+            try
+            {
+                datos.setearConsulta($"select ImagenUrl from IMAGENES where IdArticulo = '{idArticulo}'");
+                datos.ejecturaLectura();
+
+                while (datos.Lector.Read())
+                {
+                    imagenes.Add((string)datos.Lector["ImagenUrl"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return imagenes;
+        }
+
+        public List<int> obtenerImagenesSinPrincipal(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<int> imagenes = new List<int>();
+            try
+            {
+                datos.setearConsulta($"select Id from IMAGENES where IdArticulo = '{idArticulo}' ORDER BY Id ASC");
+                datos.ejecturaLectura();
+
+                while (datos.Lector.Read())
+                {
+                    imagenes.Add((int)datos.Lector["Id"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return imagenes.Skip(1).ToList();
+        }
+
+        public void EliminarImagen (int idImagen)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"delete from IMAGENES where Id = '{idImagen}'");
+                datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
