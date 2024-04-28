@@ -50,7 +50,7 @@
             this.panel1.Location = new System.Drawing.Point(2, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(833, 107);
+            this.panel1.Size = new System.Drawing.Size(883, 106);
             this.panel1.TabIndex = 0;
             // 
             // labelMenuPrincipal
@@ -119,20 +119,20 @@
             // 
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvLista.Location = new System.Drawing.Point(9, 149);
+            this.dgvLista.Location = new System.Drawing.Point(17, 125);
             this.dgvLista.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLista.MultiSelect = false;
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.RowHeadersWidth = 51;
             this.dgvLista.RowTemplate.Height = 24;
             this.dgvLista.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLista.Size = new System.Drawing.Size(514, 152);
+            this.dgvLista.Size = new System.Drawing.Size(602, 176);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.SelectionChanged += new System.EventHandler(this.dgvLista_SelectionChanged);
             // 
             // pbxLista
             // 
-            this.pbxLista.Location = new System.Drawing.Point(554, 145);
+            this.pbxLista.Location = new System.Drawing.Point(623, 125);
             this.pbxLista.Margin = new System.Windows.Forms.Padding(2);
             this.pbxLista.Name = "pbxLista";
             this.pbxLista.Size = new System.Drawing.Size(262, 255);
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 415);
+            this.ClientSize = new System.Drawing.Size(885, 416);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.pbxLista);
             this.Controls.Add(this.dgvLista);

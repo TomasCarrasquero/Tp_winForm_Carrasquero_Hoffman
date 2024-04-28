@@ -15,10 +15,15 @@ namespace dominio
         public string codigo { get; set; }
         [DisplayName ("Nombre")]
         public string nombre { get; set; }
+        [DisplayName("Descripción")]
         public string descripcion { get; set; }
+        [DisplayName("Marca")]
         public Marca marca { get; set; }
+        [DisplayName("Categoria")]
         public Categoria categoria { get; set; }
+        [DisplayName("Url Imagen")]
         public Imagen imagen { get; set; }
+        [DisplayName("Precio")]
         public decimal precio { get; set; }
     }
 }

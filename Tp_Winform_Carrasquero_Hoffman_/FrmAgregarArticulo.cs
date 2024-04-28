@@ -49,11 +49,6 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                     articulo = new Articulo();
 
                 articulo.codigo = txtCodigo.Text;
-                if (!soloNumeros(articulo.codigo))
-                {
-                    MessageBox.Show("Por favor, ingrese solo números en el campo de código.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
                 articulo.nombre = txtNombre.Text;
                 articulo.descripcion = txtDescripcion.Text;
 
