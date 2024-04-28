@@ -29,8 +29,7 @@ namespace negocio
                     aux.nombre = (string)datos.Lector["Nombre"];
                     aux.descripcion = (string)datos.Lector["Descripcion"];
                     aux.precio = (decimal)datos.Lector["Precio"];
-                    aux.imagen = (string)datos.Lector["ImagenUrl"];
-
+                    aux.imagen = datos.Lector["ImagenUrl"] != System.DBNull.Value ? (string)datos.Lector["ImagenUrl"] : $"https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg";
 
                     //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
                     aux.categoria = new Categoria();
@@ -43,18 +42,18 @@ namespace negocio
 
                     lista.Add(aux);
                 }
-
-                return lista;
             }
 
             catch (Exception ex)
             {
-                throw ex;
+                //throw ex;
             }
             finally
             {
                 datos.cerrarConexion();
             }
+            
+            return lista;
         }
 
         public void agregar(Articulo nuevo)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using dominio;
 using negocio;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Tp_Winform_Carrasquero_Hoffman_
 {
@@ -26,22 +27,34 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo arti = new Articulo();
+            Articulo articulo = new Articulo();
             ArticuloNegocio negocio = new ArticuloNegocio();
+
+            List<string> resultado = ValidarAregarArticulo();
+
+            if (resultado.Any())
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, resultado.ToArray()));
+                return;
+            }
 
             try
             {
-                arti.codigo = txtCodigo.Text;
-                arti.nombre = txtNombre.Text;  
-                arti.descripcion = txtDescripcion.Text;
-                arti.imagen = txtUrl.Text;
-                arti.marca= (Marca)cboMarca.SelectedItem;
-                arti.categoria = (Categoria)cboCategoria.SelectedItem;
-                arti.precio = decimal.Parse(txtPrecio.Text);
+                articulo.codigo = txtCodigo.Text;
+                articulo.nombre = txtNombre.Text;  
+                articulo.descripcion = txtDescripcion.Text;
+                articulo.imagen = txtUrl.Text;
+                articulo.marca= (Marca)cboMarca.SelectedItem;
+                articulo.categoria = (Categoria)cboCategoria.SelectedItem;
 
-                negocio.agregar(arti);
+                if (!string.IsNullOrWhiteSpace(txtPrecio.Text))
+                {
+                    articulo.precio = decimal.Parse(txtPrecio.Text);
+                }
+
+                negocio.agregar(articulo);
                 MessageBox.Show("Agregado correctamente");
-                Close();
+                this.DialogResult = DialogResult.OK;
 
             }
             catch (Exception ex)
@@ -62,6 +75,58 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtPrecio_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrecio_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private List<string> ValidarAregarArticulo()
+        {
+            List<string> errores = new List<string>();
+            
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                errores.Add("El codigo es Requerido");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                errores.Add("El nombre es Requerido");
+            }
+
+            return errores;
+        }
+
+        private void m(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUrl_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                pictureBox1.Load(txtUrl.Text);
+            }
+            catch (Exception ex)
+            {
+                pictureBox1.Load("https://bub.bh/wp-content/uploads/2018/02/image-placeholder.jpg");
             }
         }
     }
