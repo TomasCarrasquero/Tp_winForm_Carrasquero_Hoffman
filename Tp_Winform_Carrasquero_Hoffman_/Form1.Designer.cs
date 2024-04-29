@@ -40,6 +40,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregarCategoria = new System.Windows.Forms.Button();
             this.btnAgregarMarca = new System.Windows.Forms.Button();
+            this.btnSiguiente = new System.Windows.Forms.Button();
+            this.btnAnterior = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLista)).BeginInit();
@@ -127,7 +129,7 @@
             this.pbxLista.Location = new System.Drawing.Point(650, 149);
             this.pbxLista.Margin = new System.Windows.Forms.Padding(2);
             this.pbxLista.Name = "pbxLista";
-            this.pbxLista.Size = new System.Drawing.Size(262, 255);
+            this.pbxLista.Size = new System.Drawing.Size(241, 208);
             this.pbxLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxLista.TabIndex = 7;
             this.pbxLista.TabStop = false;
@@ -172,11 +174,33 @@
             this.btnAgregarMarca.UseVisualStyleBackColor = true;
             this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
             // 
+            // btnSiguiente
+            // 
+            this.btnSiguiente.Location = new System.Drawing.Point(782, 373);
+            this.btnSiguiente.Name = "btnSiguiente";
+            this.btnSiguiente.Size = new System.Drawing.Size(75, 23);
+            this.btnSiguiente.TabIndex = 12;
+            this.btnSiguiente.Text = "Siguiente";
+            this.btnSiguiente.UseVisualStyleBackColor = true;
+            this.btnSiguiente.Click += new System.EventHandler(this.btnSiguiente_Click);
+            // 
+            // btnAnterior
+            // 
+            this.btnAnterior.Location = new System.Drawing.Point(687, 373);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(75, 23);
+            this.btnAnterior.TabIndex = 13;
+            this.btnAnterior.Text = "Anterior";
+            this.btnAnterior.UseVisualStyleBackColor = true;
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(913, 426);
+            this.Controls.Add(this.btnAnterior);
+            this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAgregarMarca);
             this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.label1);
@@ -218,6 +242,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregarCategoria;
         private System.Windows.Forms.Button btnAgregarMarca;
+        private System.Windows.Forms.Button btnSiguiente;
+        private System.Windows.Forms.Button btnAnterior;
     }
 }
 

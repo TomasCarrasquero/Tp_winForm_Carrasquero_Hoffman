@@ -25,5 +25,7 @@ namespace dominio
         public Imagen imagen { get; set; }
         [DisplayName("Precio")]
         public decimal precio { get; set; }
+
+        public List<string> imagenes { get; set; }
     }
 }
