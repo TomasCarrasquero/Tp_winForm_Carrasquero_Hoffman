@@ -67,7 +67,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta($"SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id AND ISNULL(ImagenUrl,'') <> '') as ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca  FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca WHERE A.Id = {idArticulo}"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
+                datos.setearConsulta($"SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id AND ISNULL(ImagenUrl,'') <> '') as ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca  FROM ARTICULOS A LEFT INNER CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca WHERE A.Id = {idArticulo}"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
                 datos.ejecturaLectura();
 
                 while (datos.Lector.Read())
@@ -205,7 +205,7 @@ namespace negocio
 
             try
             {
-                datos.setearConsulta($"select 1 from ARTICULOS where Codigo = '{codigo}'");
+                datos.setearConsulta($"select Id from ARTICULOS where Codigo = '{codigo}'");
                 datos.ejecturaLectura();
 
                 if (datos.Lector.Read())

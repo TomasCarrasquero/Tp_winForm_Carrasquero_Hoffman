@@ -107,6 +107,8 @@
             this.Controls.Add(this.txtBoxImagen3);
             this.Controls.Add(this.txtBoxImagen2);
             this.Controls.Add(this.txtBoxImagen1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FrmAgregarImagen";
             this.Text = "Agregar Imagen";
             this.Load += new System.EventHandler(this.FrmAgregarImagen_Load);
