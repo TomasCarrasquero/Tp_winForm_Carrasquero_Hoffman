@@ -158,7 +158,7 @@
             this.btnAgregarCategoria.Name = "btnAgregarCategoria";
             this.btnAgregarCategoria.Size = new System.Drawing.Size(98, 36);
             this.btnAgregarCategoria.TabIndex = 10;
-            this.btnAgregarCategoria.Text = "Agregar Categoria";
+            this.btnAgregarCategoria.Text = "Gestionar Categorias";
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
             // 
             // btnAgregarMarca
@@ -167,7 +167,7 @@
             this.btnAgregarMarca.Name = "btnAgregarMarca";
             this.btnAgregarMarca.Size = new System.Drawing.Size(87, 36);
             this.btnAgregarMarca.TabIndex = 11;
-            this.btnAgregarMarca.Text = "Agregar Marca";
+            this.btnAgregarMarca.Text = "Gestionar Marcas";
             this.btnAgregarMarca.UseVisualStyleBackColor = true;
             this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
             // 

@@ -43,6 +43,29 @@ namespace Tp_Winform_Carrasquero_Hoffman_
             }
         }
 
-        
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dvgMarca.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+                return;
+
+            }
+            Marca seleccionado = (Marca)dvgMarca.CurrentRow.DataBoundItem;
+
+            DialogResult result = MessageBox.Show("Esta seguro que desea eliminar el registro?", "eliminar registro", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                MarcaNegocio marcanegocio = new MarcaNegocio();
+                marcanegocio.eliminar(seleccionado.id);
+
+                MessageBox.Show("El registro se ha eliminado con exito");
+
+                CargarMarca();
+            }
+
+
+
+        }
     }
 }

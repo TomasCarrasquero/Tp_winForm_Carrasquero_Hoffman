@@ -36,6 +36,17 @@ namespace Tp_Winform_Carrasquero_Hoffman_
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+                {
+                    MessageBox.Show("Por favor, ingrese una descripción para la marca.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
+                if (marcanegocio.Existencia(txtDescripcion.Text))
+                {
+                    MessageBox.Show("La marca ya existe en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 marcanegocio.agregarMar(txtDescripcion.Text);
                 MessageBox.Show("Marca agregada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
@@ -45,5 +56,9 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 MessageBox.Show("Error al agregar la marca: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
     }
 }
