@@ -76,7 +76,7 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
             foreach (var imagen in imagenes)
             {
-                negocio.EliminarImagen(imagen);
+                negocio.eliminarImagen(imagen);
             }
 
             if (!string.IsNullOrWhiteSpace(txtBoxImagen1.Text))

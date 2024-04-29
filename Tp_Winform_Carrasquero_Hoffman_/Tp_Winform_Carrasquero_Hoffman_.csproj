@@ -64,6 +64,12 @@
     <Compile Include="FrmAgregarImagen.Designer.cs">
       <DependentUpon>FrmAgregarImagen.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmDetalles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDetalles.Designer.cs">
+      <DependentUpon>FrmDetalles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -74,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmAgregarImagen.resx">
       <DependentUpon>FrmAgregarImagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmDetalles.resx">
+      <DependentUpon>FrmDetalles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

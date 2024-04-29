@@ -138,5 +138,20 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 dgvLista.DataSource = listaArticulo;
             }
         }
+
+        private void btnDetalles_Click(object sender, EventArgs e)
+        {
+            if (dgvLista.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+                return;
+            }
+
+            Articulo seleccionado = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+
+            FrmDetalles detalle = new FrmDetalles(seleccionado);
+
+            detalle.ShowDialog();
+        }
     }
 }

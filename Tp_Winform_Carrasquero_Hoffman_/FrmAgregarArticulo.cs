@@ -75,7 +75,16 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                     
                     if (!string.IsNullOrWhiteSpace(txtUrl.Text))
                     {
-                        negocio.agregarImagen(articuloOperar.id, txtUrl.Text);
+                        int imagenPrincipal = negocio.obtenerImagenPrincipal(articuloOperar.id);
+                        
+                        if (imagenPrincipal > 0)
+                        {
+                            negocio.modificarImagen(imagenPrincipal, txtUrl.Text);
+                        }
+                        else
+                        {
+                            negocio.agregarImagen(articuloOperar.id, txtUrl.Text);
+                        }
                     }
 
                     MessageBox.Show("Modificado correctamente");

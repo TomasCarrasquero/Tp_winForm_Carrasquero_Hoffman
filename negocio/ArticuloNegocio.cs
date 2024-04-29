@@ -60,6 +60,50 @@ namespace negocio
             return lista;
         }
 
+        public Articulo obtenerArticuloPorId(int idArticulo)
+        {
+            Articulo articulo = new Articulo();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, A.Precio, (SELECT TOP 1 ImagenUrl FROM IMAGENES WHERE IdArticulo = A.Id AND ISNULL(ImagenUrl,'') <> '') as ImagenUrl, ISNULL(C.Descripcion, 'Sin Descripcion') Categoria, C.Id IDCategoria, M.Descripcion Marca, M.Id IDMarca  FROM ARTICULOS A LEFT JOIN CATEGORIAS C ON C.Id = A.IdCategoria LEFT JOIN MARCAS M ON M.Id = A.IdMarca WHERE A.Id = {idArticulo}"); // ESTA CAMBIA EL ISNNUL POR LA PALABRA SIN DESCRIPCION
+                datos.ejecturaLectura();
+
+                while (datos.Lector.Read())
+                {
+                    articulo.id = (int)datos.Lector["Id"];
+                    articulo.codigo = (string)datos.Lector["Codigo"];
+                    articulo.nombre = (string)datos.Lector["Nombre"];
+                    articulo.descripcion = (string)datos.Lector["Descripcion"];
+                    articulo.precio = (decimal)datos.Lector["Precio"];
+
+                    articulo.imagen = new Imagen();
+                    articulo.imagen.UrlImagen = datos.Lector["ImagenUrl"] != System.DBNull.Value ? (string)datos.Lector["ImagenUrl"] : "";
+
+                    //IMPORTANTE PARA COMPOSICION y PARA TRAER COSAS DE OTRAS TABLAS REGISTROS COMPUESTOS
+                    articulo.categoria = new Categoria();
+                    articulo.categoria.nombre = (string)datos.Lector["Categoria"];
+                    articulo.categoria.id = (int)datos.Lector["IDCategoria"];
+
+                    articulo.marca = new Marca();
+                    articulo.marca.nombre = (string)datos.Lector["Marca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
+                    articulo.marca.id = (int)datos.Lector["IDMarca"];//PARA LA LISTA DESPLEGABLE Y MODIFICAR
+                }
+            }
+
+            catch (Exception ex)
+            {
+                //throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return articulo;
+        }
+
         public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -253,7 +297,52 @@ namespace negocio
             return imagenes.Skip(1).ToList();
         }
 
-        public void EliminarImagen (int idImagen)
+        public int obtenerImagenPrincipal(int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            int imagen = 0;
+            try
+            {
+                datos.setearConsulta($"select TOP 1 Id from IMAGENES where IdArticulo = '{idArticulo}' ORDER BY Id ASC");
+                datos.ejecturaLectura();
+
+                while (datos.Lector.Read())
+                {
+                    imagen = (int)datos.Lector["Id"];
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return imagen;
+        }
+
+        public void modificarImagen(int idImagen, string imagenUrl)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta($"update IMAGENES SET ImagenUrl = '{imagenUrl}' WHERE Id = {idImagen}");
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarImagen (int idImagen)
         {
             AccesoDatos datos = new AccesoDatos();
 

@@ -83,6 +83,7 @@
             this.btnDetalles.TabIndex = 2;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.UseVisualStyleBackColor = true;
+            this.btnDetalles.Click += new System.EventHandler(this.btnDetalles_Click);
             // 
             // btnEliminar
             // 
