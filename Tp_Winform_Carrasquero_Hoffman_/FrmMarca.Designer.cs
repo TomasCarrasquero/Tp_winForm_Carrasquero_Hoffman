@@ -95,7 +95,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dvgMarca);
             this.Name = "FrmMarca";
-            this.Text = "Agregar Marca";
+            this.Text = "Gestionar Marca";
             this.Load += new System.EventHandler(this.FrmMarca_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgMarca)).EndInit();
             this.ResumeLayout(false);

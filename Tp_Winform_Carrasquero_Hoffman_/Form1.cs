@@ -163,5 +163,15 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 CargarArticulos();
             }
         }
+
+        private void btnAgregarCategoria_Click(object sender, EventArgs e)
+        {
+            FrmCategoria alta = new FrmCategoria();
+
+            if (alta.ShowDialog() == DialogResult.OK)
+            {
+                CargarArticulos();
+            }
+        }
     }
 }

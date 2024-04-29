@@ -58,6 +58,12 @@
     <Compile Include="FrmAgregarArticulo.Designer.cs">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmAgregarCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmAgregarCategoria.Designer.cs">
+      <DependentUpon>FrmAgregarCategoria.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmAgregarImagen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,12 @@
     </Compile>
     <Compile Include="frmAgregarMarca.Designer.cs">
       <DependentUpon>frmAgregarMarca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCategoria.Designer.cs">
+      <DependentUpon>FrmCategoria.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmDetalles.cs">
       <SubType>Form</SubType>
@@ -90,11 +102,17 @@
     <EmbeddedResource Include="FrmAgregarArticulo.resx">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmAgregarCategoria.resx">
+      <DependentUpon>FrmAgregarCategoria.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmAgregarImagen.resx">
       <DependentUpon>FrmAgregarImagen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAgregarMarca.resx">
       <DependentUpon>frmAgregarMarca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCategoria.resx">
+      <DependentUpon>FrmCategoria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmDetalles.resx">
       <DependentUpon>FrmDetalles.cs</DependentUpon>
