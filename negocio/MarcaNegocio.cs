@@ -41,7 +41,56 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregarMar(string descripcion)
+        {
+            AccesoDatos datos = new AccesoDatos();
 
+            try
+            {
+                datos.setearConsulta("Insert into MARCAS (Descripcion) values (@descripcion)");
+                datos.setearParametros("@descripcion", descripcion);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int ProximoID()
+        {
+            int id = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT MAX(Id) +1 AS ProximoId FROM MARCAS");
+                datos.ejecturaLectura();
+
+                if (datos.Lector.Read())
+                {
+                    if (!datos.Lector.IsDBNull(0))
+                    {
+                        id = (int)datos.Lector["ProximoId"];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return id;
+        }
 
 
 

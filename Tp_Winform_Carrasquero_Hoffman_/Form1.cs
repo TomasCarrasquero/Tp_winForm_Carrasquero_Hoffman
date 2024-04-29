@@ -153,5 +153,15 @@ namespace Tp_Winform_Carrasquero_Hoffman_
 
             detalle.ShowDialog();
         }
+
+        private void btnAgregarMarca_Click(object sender, EventArgs e)
+        {
+            FrmMarca alta = new FrmMarca();
+
+            if (alta.ShowDialog() == DialogResult.OK)
+            {
+                CargarArticulos();
+            }
+        }
     }
 }

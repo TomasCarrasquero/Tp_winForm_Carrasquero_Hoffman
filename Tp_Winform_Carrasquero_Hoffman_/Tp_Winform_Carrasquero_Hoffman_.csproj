@@ -64,11 +64,23 @@
     <Compile Include="FrmAgregarImagen.Designer.cs">
       <DependentUpon>FrmAgregarImagen.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAgregarMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAgregarMarca.Designer.cs">
+      <DependentUpon>frmAgregarMarca.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmDetalles.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmDetalles.Designer.cs">
       <DependentUpon>FrmDetalles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMarca.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMarca.Designer.cs">
+      <DependentUpon>FrmMarca.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,8 +93,14 @@
     <EmbeddedResource Include="FrmAgregarImagen.resx">
       <DependentUpon>FrmAgregarImagen.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAgregarMarca.resx">
+      <DependentUpon>frmAgregarMarca.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDetalles.resx">
       <DependentUpon>FrmDetalles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMarca.resx">
+      <DependentUpon>FrmMarca.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

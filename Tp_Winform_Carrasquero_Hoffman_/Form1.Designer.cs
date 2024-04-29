@@ -38,6 +38,8 @@
             this.pbxLista = new System.Windows.Forms.PictureBox();
             this.btnEditar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnAgregarCategoria = new System.Windows.Forms.Button();
+            this.btnAgregarMarca = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxLista)).BeginInit();
@@ -47,28 +49,29 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.labelMenuPrincipal);
-            this.panel1.Location = new System.Drawing.Point(3, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(2, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1111, 132);
+            this.panel1.Size = new System.Drawing.Size(910, 107);
             this.panel1.TabIndex = 0;
             // 
             // labelMenuPrincipal
             // 
             this.labelMenuPrincipal.AutoSize = true;
             this.labelMenuPrincipal.Font = new System.Drawing.Font("Arial", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMenuPrincipal.Location = new System.Drawing.Point(337, 28);
+            this.labelMenuPrincipal.Location = new System.Drawing.Point(356, 25);
+            this.labelMenuPrincipal.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMenuPrincipal.Name = "labelMenuPrincipal";
-            this.labelMenuPrincipal.Size = new System.Drawing.Size(358, 55);
+            this.labelMenuPrincipal.Size = new System.Drawing.Size(292, 45);
             this.labelMenuPrincipal.TabIndex = 0;
             this.labelMenuPrincipal.Text = "Menú Principal";
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 395);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdd.Location = new System.Drawing.Point(9, 321);
+            this.btnAdd.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(160, 44);
+            this.btnAdd.Size = new System.Drawing.Size(92, 36);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Agregar articulo";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -76,10 +79,10 @@
             // 
             // btnDetalles
             // 
-            this.btnDetalles.Location = new System.Drawing.Point(177, 395);
-            this.btnDetalles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDetalles.Location = new System.Drawing.Point(105, 321);
+            this.btnDetalles.Margin = new System.Windows.Forms.Padding(2);
             this.btnDetalles.Name = "btnDetalles";
-            this.btnDetalles.Size = new System.Drawing.Size(160, 44);
+            this.btnDetalles.Size = new System.Drawing.Size(99, 36);
             this.btnDetalles.TabIndex = 2;
             this.btnDetalles.Text = "Detalles";
             this.btnDetalles.UseVisualStyleBackColor = true;
@@ -87,10 +90,10 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(511, 395);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEliminar.Location = new System.Drawing.Point(312, 321);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(160, 44);
+            this.btnEliminar.Size = new System.Drawing.Size(98, 36);
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -100,41 +103,40 @@
             // 
             this.txtBuscar.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBuscar.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.txtBuscar.Location = new System.Drawing.Point(128, 462);
-            this.txtBuscar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtBuscar.Location = new System.Drawing.Point(96, 375);
+            this.txtBuscar.Margin = new System.Windows.Forms.Padding(2);
             this.txtBuscar.Name = "txtBuscar";
-            this.txtBuscar.Size = new System.Drawing.Size(494, 30);
+            this.txtBuscar.Size = new System.Drawing.Size(372, 26);
             this.txtBuscar.TabIndex = 4;
             this.txtBuscar.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBuscar_KeyUp);
             // 
             // dgvLista
             // 
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLista.Location = new System.Drawing.Point(12, 183);
-            this.dgvLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvLista.Location = new System.Drawing.Point(9, 149);
+            this.dgvLista.Margin = new System.Windows.Forms.Padding(2);
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.RowHeadersWidth = 51;
             this.dgvLista.RowTemplate.Height = 24;
-            this.dgvLista.Size = new System.Drawing.Size(685, 187);
+            this.dgvLista.Size = new System.Drawing.Size(621, 167);
             this.dgvLista.TabIndex = 6;
             this.dgvLista.SelectionChanged += new System.EventHandler(this.dgvLista_SelectionChanged);
             // 
             // pbxLista
             // 
-            this.pbxLista.Location = new System.Drawing.Point(739, 178);
-            this.pbxLista.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pbxLista.Location = new System.Drawing.Point(650, 149);
+            this.pbxLista.Margin = new System.Windows.Forms.Padding(2);
             this.pbxLista.Name = "pbxLista";
-            this.pbxLista.Size = new System.Drawing.Size(349, 314);
+            this.pbxLista.Size = new System.Drawing.Size(262, 255);
             this.pbxLista.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxLista.TabIndex = 7;
             this.pbxLista.TabStop = false;
             // 
             // btnEditar
             // 
-            this.btnEditar.Location = new System.Drawing.Point(344, 395);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEditar.Location = new System.Drawing.Point(209, 321);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(160, 44);
+            this.btnEditar.Size = new System.Drawing.Size(98, 36);
             this.btnEditar.TabIndex = 8;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
@@ -143,17 +145,39 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 471);
+            this.label1.Location = new System.Drawing.Point(18, 383);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 16);
+            this.label1.Size = new System.Drawing.Size(66, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Filtro Rapido";
             // 
+            // btnAgregarCategoria
+            // 
+            this.btnAgregarCategoria.Location = new System.Drawing.Point(532, 321);
+            this.btnAgregarCategoria.Name = "btnAgregarCategoria";
+            this.btnAgregarCategoria.Size = new System.Drawing.Size(98, 36);
+            this.btnAgregarCategoria.TabIndex = 10;
+            this.btnAgregarCategoria.Text = "Agregar Categoria";
+            this.btnAgregarCategoria.UseVisualStyleBackColor = true;
+            // 
+            // btnAgregarMarca
+            // 
+            this.btnAgregarMarca.Location = new System.Drawing.Point(439, 321);
+            this.btnAgregarMarca.Name = "btnAgregarMarca";
+            this.btnAgregarMarca.Size = new System.Drawing.Size(87, 36);
+            this.btnAgregarMarca.TabIndex = 11;
+            this.btnAgregarMarca.Text = "Agregar Marca";
+            this.btnAgregarMarca.UseVisualStyleBackColor = true;
+            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
+            // 
             // MenuPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1112, 511);
+            this.ClientSize = new System.Drawing.Size(913, 426);
+            this.Controls.Add(this.btnAgregarMarca);
+            this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.pbxLista);
@@ -164,7 +188,7 @@
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -191,6 +215,8 @@
         private System.Windows.Forms.PictureBox pbxLista;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAgregarCategoria;
+        private System.Windows.Forms.Button btnAgregarMarca;
     }
 }
 
