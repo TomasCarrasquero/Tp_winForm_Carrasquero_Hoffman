@@ -64,8 +64,29 @@ namespace Tp_Winform_Carrasquero_Hoffman_
                 CargarMarca();
             }
 
+        }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dvgMarca.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un registro");
+                return;
+            }
 
+            Marca seleccionado = (Marca)dvgMarca.CurrentRow.DataBoundItem;
+
+            frmAgregarMarca editar = new frmAgregarMarca(seleccionado);
+
+            if (editar.ShowDialog() == DialogResult.OK)
+            {
+                CargarMarca();
+            }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
