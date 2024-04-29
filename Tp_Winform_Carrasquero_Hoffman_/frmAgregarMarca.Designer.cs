@@ -105,6 +105,7 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.llbId);
             this.Name = "frmAgregarMarca";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Marca";
             this.Load += new System.EventHandler(this.frmAgregarMarca_Load);
             this.ResumeLayout(false);

@@ -39,8 +39,11 @@
             // dvgMarca
             // 
             this.dvgMarca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgMarca.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dvgMarca.Location = new System.Drawing.Point(44, 41);
+            this.dvgMarca.MultiSelect = false;
             this.dvgMarca.Name = "dvgMarca";
+            this.dvgMarca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dvgMarca.Size = new System.Drawing.Size(241, 161);
             this.dvgMarca.TabIndex = 0;
             // 
@@ -95,6 +98,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dvgMarca);
             this.Name = "FrmMarca";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestionar Marca";
             this.Load += new System.EventHandler(this.FrmMarca_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dvgMarca)).EndInit();

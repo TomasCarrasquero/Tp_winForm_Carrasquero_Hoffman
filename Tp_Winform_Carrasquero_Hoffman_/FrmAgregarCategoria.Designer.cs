@@ -105,6 +105,7 @@
             this.Controls.Add(this.lblDescripcion);
             this.Controls.Add(this.llbId);
             this.Name = "FrmAgregarCategoria";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Categoria";
             this.Load += new System.EventHandler(this.FrmAgregarCategoria_Load);
             this.ResumeLayout(false);
